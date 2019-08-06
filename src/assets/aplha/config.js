@@ -1,0 +1,3 @@
+const API_KEY = "IHDD08X98ZZH990K"
+
+export {API_KEY}
