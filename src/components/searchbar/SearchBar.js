@@ -1,12 +1,21 @@
 import React, {Component} from 'react';
 import './search.css'
 import {API_KEY} from '../../assets/aplha/config'
-var DEMO_API_KEY='demo'
+//var DEMO_API_KEY='demo'
 
-//TODO
-// bugs.
-// 1. Style changes sometimes, cannot accomodate large texts. 
-// 2. when clearing out input field, the app crashes, could be becasue API is requesting empty value
+/*
+SEARCH BAR
+This Component searches for a stock from alphavantage API key.
+It returns best match cases, and shows as response.
+Click on the input area, the cancel button is activated,
+the button gets reset when you either click outside or 
+click on cancel.
+
+TODO:
+Add function to the results when clicked on which will add data to a Store or database.
+Display that in a seperate component
+
+*/
 
 class SearchBar extends Component {
     constructor(props){
@@ -40,13 +49,13 @@ class SearchBar extends Component {
     }
     handleChange = (e) => {
         this.setState({searchInput:e.target.value})
-        if(e.target.value!=''){
+        if(e.target.value!==''){
             fetch('https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords='+e.target.value+'&apikey='+API_KEY)
             .then(response=>response.json())
             .then(responseJson=>{
                 this.setState({searchResults: responseJson.bestMatches,
                                 resultState: true})
-                console.log('called api')
+                //console.log('called api')
                 }
             ).catch((err)=>{
                 console.log(err)
